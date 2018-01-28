@@ -1,7 +1,11 @@
 scalar DateTime
 
 type Query {
-    article: Article
+    article(permalink: String): Article
+    articles: [Article]
+    author(name: String): Author
+    authors: [Author]
+    tags: [Tag]
 }
 
 type Article {
@@ -20,6 +24,7 @@ type Article {
 type Tag {
     id: ID!
     name: String
+    articles: [Article]
 }
 
 type Author {

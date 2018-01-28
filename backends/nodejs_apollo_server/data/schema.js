@@ -1,13 +1,10 @@
-import { makeExecutableSchema, addMockFunctionsToSchema } from 'graphql-tools'
-import { importSchema } from 'graphql-import'
+import { makeExecutableSchema, addMockFunctionsToSchema } from "graphql-tools"
+import { importSchema } from "graphql-import"
 
-const typeDefs = importSchema('../../bloggie.graphql')
+import resolvers from "./resolvers"
 
-const mocks = {
-    String: () => 'It works',
-}
+const typeDefs = importSchema("../../bloggie.graphql")
 
-const schema = makeExecutableSchema({ typeDefs })
-addMockFunctionsToSchema({ schema, mocks })
+const schema = makeExecutableSchema({ typeDefs, resolvers })
 
 export default schema

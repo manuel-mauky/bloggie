@@ -1,46 +1,71 @@
 scalar DateTime
 
 type Query {
-    article(permalink: String): Article
-    articles: [Article]
-    author(name: String): Author
-    authors: [Author]
-    tags: [Tag]
+  article(id: String, permalink: String): Article
+  articles: [Article]
+  author(name: String): Author
+  authors: [Author]
+  tags: [Tag]
+}
+
+input ArticleInput {
+  title: String
+  permalink: String
+  teaser: String
+  text: String
+}
+
+type Mutation {
+  addTag(name: String!): Tag
+
+  addArticle(
+    input: ArticleInput!
+  ): Article
+
+  editArticle(
+    id: ID!
+    input: ArticleInput!
+  ): Article
+
+  editTags(
+    articleId: ID!
+    tags: [ID]!
+  ): Article
 }
 
 type Article {
-    id: ID!
-    title: String
-    permalink: String
-    teaser: String
-    text: String
-    releaseDate: DateTime
+  id: ID!
+  title: String
+  permalink: String
+  teaser: String
+  text: String
+  releaseDate: DateTime
 
-    tags: [Tag]
-    authors: [Author]
-    comments: [Comment]
+  tags: [Tag]
+  authors: [Author]
+  comments: [Comment]
 }
 
 type Tag {
-    id: ID!
-    name: String
-    articles: [Article]
+  id: ID!
+  name: String
+  articles: [Article]
 }
 
 type Author {
-    id: ID!
-    name: String
+  id: ID!
+  name: String
 
-    articles: [Article]
-    comments: [Comment]
+  articles: [Article]
+  comments: [Comment]
 }
 
 type Comment {
-    id: ID!
-    text: String
+  id: ID!
+  text: String
 
-    article: Article!
+  article: Article!
 
-    author: Author
-    guestAuthor: String
+  author: Author
+  guestAuthor: String
 }

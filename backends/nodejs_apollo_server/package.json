@@ -24,12 +24,11 @@
         "prettier": "1.10.2"
     },
     "babel": {
-        "presets": [
-            "env"
-        ]
+        "presets": ["env"]
     },
     "scripts": {
-        "start": "nodemon ./server.js --exec babel-node"
+        "start": "nodemon ./server.js --exec babel-node",
+        "prod": "nodemon ./server.js --prod --exec babel-node"
     },
     "prettier": {
         "printWidth": 120,

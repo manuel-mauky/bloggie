@@ -1,16 +1,24 @@
 {
-  "name": "react-apollo",
-  "version": "0.1.0",
-  "private": true,
-  "dependencies": {
-    "react": "^16.2.0",
-    "react-dom": "^16.2.0",
-    "react-scripts": "1.1.0"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
-  }
+    "name": "react-apollo",
+    "version": "0.1.0",
+    "private": true,
+    "dependencies": {
+        "react": "^16.2.0",
+        "react-dom": "^16.2.0",
+        "react-scripts": "1.1.0"
+    },
+    "scripts": {
+        "start": "react-scripts start",
+        "build": "react-scripts build",
+        "test": "react-scripts test --env=jsdom",
+        "eject": "react-scripts eject"
+    },
+    "devDependencies": {
+        "prettier": "^1.10.2"
+    },
+    "prettier": {
+        "printWidth": 120,
+        "semi": false,
+        "trailingComma": "es5"
+    }
 }

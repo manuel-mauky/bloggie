@@ -2,7 +2,7 @@
 
 import React, { Component } from "react"
 
-import { BrowserRouter, Route, Switch } from "react-router-dom"
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom"
 
 import Navigation from "./Navigation"
 import ArticleList from "./ArticleList"
@@ -10,13 +10,14 @@ import AuthorList from "./AuthorList"
 import ArticleDetails from "./ArticleDetails"
 import TagList from "./TagList"
 import TagDetails from "./TagDetails"
+import About from "./About"
 
-const NoMatch = props => <p>404</p>
+import NoMatchPage from "./NoMatchPage"
 
 class App extends Component {
   render() {
     return (
-      <BrowserRouter>
+      <Router>
         <div>
           <Navigation />
           <div>
@@ -27,11 +28,12 @@ class App extends Component {
               <Route path="/articles" component={ArticleList} />
               <Route path="/tags/:tagname" component={TagDetails} />
               <Route path="/tags" component={TagList} />
-              <Route component={NoMatch} />
+              <Route path="/about" component={About} />
+              <Route component={NoMatchPage} />
             </Switch>
           </div>
         </div>
-      </BrowserRouter>
+      </Router>
     )
   }
 }

@@ -20,7 +20,7 @@ class App extends Component {
       <Router>
         <div>
           <Navigation />
-          <div>
+          <div className="container">
             <Switch>
               <Route path="/" exact component={ArticleOverviewPage} />
               <Route path="/authors" component={AuthorList} />

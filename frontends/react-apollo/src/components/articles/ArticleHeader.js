@@ -7,6 +7,8 @@ import type { Author } from "../../common.types"
 
 import AuthorsNameList from "./AuthorsNameList"
 
+import FormattedDate from "../common/FormattedDate"
+
 type Props = {
   permalink: string,
   title: string,
@@ -24,7 +26,9 @@ const ArticleHeader = (props: Props) => (
     <strong>
       <AuthorsNameList authors={props.authors} />
       <span> | </span>
-      <span>{props.releaseDate} </span>
+      <span>
+        <FormattedDate date={props.releaseDate} />
+      </span>
     </strong>
   </header>
 )

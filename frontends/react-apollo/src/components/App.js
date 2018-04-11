@@ -7,7 +7,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom"
 import Navigation from "./Navigation"
 import ArticleOverviewPage from "./articles/ArticleOverviewPage"
 import AuthorList from "./AuthorList"
-import ArticleDetails from "./ArticleDetails"
+import ArticleDetailsPage from "./articles/ArticleDetailsPage"
 import TagList from "./TagList"
 import TagDetails from "./TagDetails"
 import About from "./About"
@@ -24,7 +24,7 @@ class App extends Component {
             <Switch>
               <Route path="/" exact component={ArticleOverviewPage} />
               <Route path="/authors" component={AuthorList} />
-              <Route path="/articles/:permalink" component={ArticleDetails} />
+              <Route path="/articles/:permalink" component={ArticleDetailsPage} />
               <Route path="/articles" component={ArticleOverviewPage} />
               <Route path="/tags/:tagname" component={TagDetails} />
               <Route path="/tags" component={TagList} />

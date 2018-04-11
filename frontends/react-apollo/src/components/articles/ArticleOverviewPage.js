@@ -6,6 +6,8 @@ import { graphql } from "react-apollo"
 import gql from "graphql-tag"
 import ArticleHeader from "./ArticleHeader"
 
+import Loading from "../common/Loading"
+
 type Props = {
   articles: Array<{
     id: string,
@@ -22,11 +24,7 @@ const ArticleOverviewPage = (props: Props) => {
   const { loading, articles } = props
 
   if (loading) {
-    return (
-      <div>
-        <p>Loading...</p>
-      </div>
-    )
+    return <Loading />
   } else {
     return (
       <div>

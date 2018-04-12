@@ -10,7 +10,6 @@ const resolvers = {
     },
 
     addArticle(root, args) {
-      console.log("args:", args)
       return Article.create(args.input)
     },
 

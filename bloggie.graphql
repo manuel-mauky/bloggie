@@ -1,9 +1,9 @@
 scalar DateTime
 
 type Query {
-  article(id: String, permalink: String): Article
+  article(id: ID, permalink: String): Article
   articles: [Article]
-  author(name: String): Author
+  author(id: ID, name: String): Author
   authors: [Author]
   tags: [Tag]
 }

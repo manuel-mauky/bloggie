@@ -76,7 +76,6 @@ export default graphql(articleDetailsQuery, {
   props: ({ ownProps, data }) => ({
     ...ownProps,
     loading: data.loading,
-    data: data,
     article: data.article,
   }),
 })(ArticleDetailsPage)

@@ -22,7 +22,7 @@ type AuthorWithArticlesInfo = Author & {
 }
 
 type Props = {
-  authors?: Array<AuthorWithArticlesInfo>,
+  authors: Array<AuthorWithArticlesInfo>,
   loading: boolean,
 }
 
@@ -34,7 +34,9 @@ const AuthorsOverviewPage = ({ loading, authors }: Props) => {
       <div>
         {authors.map(author => (
           <div key={author.id}>
-            <h2>{author.name}</h2>
+            <Link to={`/authors/${author.id}`}>
+              <h2>{author.name}</h2>
+            </Link>
             <p>{author.articles.length} Articles. Latest:</p>
 
             {R.take(3, author.articles).map(article => (

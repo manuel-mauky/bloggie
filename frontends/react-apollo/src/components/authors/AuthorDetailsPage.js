@@ -8,9 +8,10 @@ import gql from "graphql-tag"
 import { Link } from "react-router-dom"
 import type { Author } from "../common.types"
 
-import ArticleHeader from "../articles/ArticleHeader"
 import FormattedDate from "../common/FormattedDate"
 import Loading from "../common/Loading"
+
+import ArticleTitleShort from "../articles/ArticleTitleShort"
 
 type Props = {
   author: Author,
@@ -31,15 +32,10 @@ const AuthorDetailsPage = ({ loading, error, author }: Props) => {
 
         {author.articles.map(article => (
           <div key={article.id}>
-            <p>
-              <Link to={`/articles/${article.permalink}`}>
-                <span className="h4">{article.title} </span>
-              </Link>
-              <span className="label label-default">
-                <FormattedDate date={article.releaseDate} />
-              </span>
-            </p>
-            {article.teaser}
+            <div style={{ marginBottom: "1em" }}>
+              <ArticleTitleShort article={article} />
+            </div>
+            <div>{article.teaser}</div>
             <hr />
           </div>
         ))}

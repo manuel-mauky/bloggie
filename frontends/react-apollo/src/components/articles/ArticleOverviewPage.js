@@ -1,7 +1,7 @@
 // @flow
 import React from "react"
 
-import type { Author } from "../../common.types"
+import type { Author, Tag } from "../../common.types"
 import { graphql } from "react-apollo"
 import gql from "graphql-tag"
 import ArticleHeader from "./ArticleHeader"
@@ -16,6 +16,7 @@ type Props = {
     teaser: string,
     releaseDate: string,
     authors: Array<Author>,
+    tags: Array<Tag>,
   }>,
   loading: boolean,
 }
@@ -30,9 +31,11 @@ const ArticleOverviewPage = (props: Props) => {
       <div>
         {articles.map(article => (
           <article key={article.id}>
-            <ArticleHeader {...article} />
-
+            <div style={{ marginBottom: "1em" }}>
+              <ArticleHeader {...article} />
+            </div>
             <section>{article.teaser}</section>
+            <hr />
           </article>
         ))}
       </div>
@@ -49,6 +52,10 @@ const articlesQuery = gql`
       teaser
       releaseDate
       authors {
+        id
+        name
+      }
+      tags {
         id
         name
       }

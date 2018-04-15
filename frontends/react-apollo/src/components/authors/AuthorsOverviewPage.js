@@ -8,9 +8,10 @@ import * as R from "ramda"
 import { Link } from "react-router-dom"
 import type { Author } from "../common.types"
 
-import ArticleHeader from "../articles/ArticleHeader"
 import FormattedDate from "../common/FormattedDate"
 import Loading from "../common/Loading"
+
+import ArticleTitleShort from "../articles/ArticleTitleShort"
 
 type AuthorWithArticlesInfo = Author & {
   articles: Array<{
@@ -37,20 +38,15 @@ const AuthorsOverviewPage = ({ loading, authors }: Props) => {
             <Link to={`/authors/${author.id}`}>
               <h2>{author.name}</h2>
             </Link>
-            <p>{author.articles.length} Articles. Latest:</p>
+            <p>{author.articles.length} Articles overall. Latest ones:</p>
 
-            {R.take(3, author.articles).map(article => (
-              <div key={article.id}>
-                <p>
-                  <Link to={`/articles/${article.permalink}`}>
-                    <span className="h4">{article.title} </span>
-                  </Link>
-                  <span className="label label-default">
-                    <FormattedDate date={article.releaseDate} />
-                  </span>
-                </p>
-              </div>
-            ))}
+            <ul>
+              {R.take(4, author.articles).map(article => (
+                <li key={article.id}>
+                  <ArticleTitleShort article={article} />
+                </li>
+              ))}
+            </ul>
           </div>
         ))}
       </div>
@@ -77,7 +73,6 @@ export default graphql(authorListQuery, {
   props: ({ ownProps, data }) => ({
     loading: data.loading,
     authors: data.authors,
-    data: data,
     ...ownProps,
   }),
 })(AuthorsOverviewPage)

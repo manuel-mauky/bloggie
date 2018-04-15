@@ -27,13 +27,15 @@ const ArticleDetailsPage = ({ article, loading }: Props) => {
     if (article) {
       return (
         <article>
-          <ArticleHeader
-            permalink={article.permalink}
-            title={article.title}
-            releaseDate={article.releaseDate}
-            authors={article.authors}
-          />
-          <hr />
+          <div style={{ marginBottom: "1em" }}>
+            <ArticleHeader
+              permalink={article.permalink}
+              title={article.title}
+              releaseDate={article.releaseDate}
+              authors={article.authors}
+              tags={article.tags}
+            />
+          </div>
           <section>
             <i>{article.teaser}</i>
           </section>
@@ -62,6 +64,10 @@ const articleDetailsQuery = gql`
       }
       comments {
         text
+      }
+      tags {
+        id
+        name
       }
     }
   }

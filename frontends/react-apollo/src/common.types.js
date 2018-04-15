@@ -5,6 +5,11 @@ export type Author = {
   name: string,
 }
 
+export type Tag = {
+  id: string,
+  name: string,
+}
+
 export type Article = {
   id: string,
   permalink: string,
@@ -13,4 +18,5 @@ export type Article = {
   text: string,
   releaseDate: Date | string,
   authors: Array<Author>,
+  tags: Array<Tag>,
 }

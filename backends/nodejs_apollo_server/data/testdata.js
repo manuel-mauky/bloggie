@@ -32,7 +32,14 @@ const createTestData = () => {
                   releaseDate: faker.date.recent(),
                 })
                 .then(article => {
-                  article.addTag(tags[faker.random.number(tags.length - 1)])
+                  const noOfTags = faker.random.number(tags.length)
+
+                  const shuffledTags = faker.helpers.shuffle(tags)
+
+                  R.times(i => {
+                    article.addTag(shuffledTags[i])
+                  }, noOfTags)
+
                   return article
                 })
                 .then(article => {

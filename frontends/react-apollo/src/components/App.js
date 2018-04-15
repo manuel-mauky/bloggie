@@ -9,9 +9,9 @@ import ArticleOverviewPage from "./articles/ArticleOverviewPage"
 import AuthorsOverviewPage from "./authors/AuthorsOverviewPage"
 import AuthorDetailsPage from "./authors/AuthorDetailsPage"
 import ArticleDetailsPage from "./articles/ArticleDetailsPage"
-import TagList from "./TagList"
-import TagDetails from "./TagDetails"
 import About from "./About"
+
+import TagOverviewPage from "./tags/TagOverviewPage"
 
 import NoMatchPage from "./NoMatchPage"
 
@@ -28,8 +28,7 @@ class App extends Component {
               <Route path="/authors" component={AuthorsOverviewPage} />
               <Route path="/articles/:permalink" component={ArticleDetailsPage} />
               <Route path="/articles" component={ArticleOverviewPage} />
-              <Route path="/tags/:tagname" component={TagDetails} />
-              <Route path="/tags" component={TagList} />
+              <Route path="/tags" component={TagOverviewPage} />
               <Route path="/about" component={About} />
               <Route component={NoMatchPage} />
             </Switch>

@@ -3,9 +3,10 @@
 import React from "react"
 import { Link } from "react-router-dom"
 
-import type { Author } from "../../common.types"
+import type { Author, Tag } from "../../common.types"
 
-import AuthorsNameList from "./AuthorsNameList"
+import AuthorsNameList from "../authors/AuthorsNameList"
+import TagList from "../tags/TagList"
 
 import FormattedDate from "../common/FormattedDate"
 
@@ -15,6 +16,7 @@ type Props = {
   releaseDate: Date | string,
   authors: Array<Author>,
   style?: any,
+  tags: Array<Tag>,
 }
 
 const ArticleHeader = (props: Props) => (
@@ -23,13 +25,19 @@ const ArticleHeader = (props: Props) => (
       <Link to={`/articles/${props.permalink}`}>{props.title}</Link>
     </h1>
 
-    <strong>
-      <AuthorsNameList authors={props.authors} />
-      <span> | </span>
-      <span>
+    <div>
+      <h4>
+        <AuthorsNameList authors={props.authors} />
+        <span> | </span>
         <FormattedDate date={props.releaseDate} />
-      </span>
-    </strong>
+      </h4>
+    </div>
+    {props.tags &&
+      props.tags.length > 0 && (
+        <div>
+          <TagList tags={props.tags} />
+        </div>
+      )}
   </header>
 )
 

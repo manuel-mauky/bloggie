@@ -8,8 +8,8 @@ import * as R from "ramda"
 import { Link } from "react-router-dom"
 import type { Author } from "../common.types"
 
-import FormattedDate from "../common/FormattedDate"
 import Loading from "../common/Loading"
+import Error from "../common/Error"
 
 import ArticleTitleShort from "../articles/ArticleTitleShort"
 
@@ -25,11 +25,14 @@ type AuthorWithArticlesInfo = Author & {
 type Props = {
   authors: Array<AuthorWithArticlesInfo>,
   loading: boolean,
+  error: Error,
 }
 
-const AuthorsOverviewPage = ({ loading, authors }: Props) => {
+const AuthorsOverviewPage = ({ loading, authors, error }: Props) => {
   if (loading) {
     return <Loading />
+  } else if (error) {
+    return <Error error={error} />
   } else {
     return (
       <div>
@@ -72,6 +75,7 @@ const authorListQuery = gql`
 export default graphql(authorListQuery, {
   props: ({ ownProps, data }) => ({
     loading: data.loading,
+    error: data.error,
     authors: data.authors,
     ...ownProps,
   }),

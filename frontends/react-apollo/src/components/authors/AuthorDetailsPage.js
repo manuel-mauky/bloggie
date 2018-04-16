@@ -5,25 +5,23 @@ import React from "react"
 import { graphql } from "react-apollo"
 import gql from "graphql-tag"
 
-import { Link } from "react-router-dom"
 import type { Author } from "../common.types"
 
-import FormattedDate from "../common/FormattedDate"
 import Loading from "../common/Loading"
-
+import Error from "../common/Error"
 import ArticleTitleShort from "../articles/ArticleTitleShort"
 
 type Props = {
   author: Author,
   loading: boolean,
-  error: any,
+  error: Error,
 }
 
 const AuthorDetailsPage = ({ loading, error, author }: Props) => {
   if (loading) {
     return <Loading />
   } else if (error) {
-    return <div>Error</div>
+    return <Error error={error} />
   } else {
     return (
       <div>
@@ -78,7 +76,6 @@ export default graphql(authorDetailsQuery, {
     ...ownProps,
     loading: data.loading,
     error: data.error,
-    data: data,
     author: data.author,
   }),
 })(AuthorDetailsPage)

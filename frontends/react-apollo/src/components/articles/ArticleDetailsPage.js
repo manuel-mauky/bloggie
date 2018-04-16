@@ -9,6 +9,7 @@ import type { Article } from "../../common.types"
 import ArticleHeader from "./ArticleHeader"
 import NoMatchPage from "../NoMatchPage"
 import Loading from "../common/Loading"
+import Error from "../common/Error"
 
 type Props = {
   match: {
@@ -18,11 +19,14 @@ type Props = {
   },
   article: Article,
   loading: boolean,
+  error: Error,
 }
 
-const ArticleDetailsPage = ({ article, loading }: Props) => {
+const ArticleDetailsPage = ({ article, loading, error }: Props) => {
   if (loading) {
     return <Loading />
+  } else if (error) {
+    return <Error error={error} />
   } else {
     if (article) {
       return (
@@ -82,6 +86,7 @@ export default graphql(articleDetailsQuery, {
   props: ({ ownProps, data }) => ({
     ...ownProps,
     loading: data.loading,
+    error: data.error,
     article: data.article,
   }),
 })(ArticleDetailsPage)

@@ -7,17 +7,22 @@ import gql from "graphql-tag"
 
 import Loading from "../common/Loading"
 
+import Error from "../common/Error"
+
 import type { TagWithArticleShortInfo } from "./TagDetails"
 import TagDetails from "./TagDetails"
 
 type Props = {
   loading: boolean,
+  error: Error,
   tags: Array<TagWithArticleShortInfo>,
 }
 
-const TagOverviewPage = ({ loading, tags }: Props) => {
+const TagOverviewPage = ({ loading, tags, error, data }: Props) => {
   if (loading) {
     return <Loading />
+  } else if (error) {
+    return <Error error={error} />
   } else {
     return <div>{tags.map(tag => <TagDetails key={tag.id} tag={tag} />)}</div>
   }
@@ -42,6 +47,7 @@ export default graphql(tagListQuery, {
   props: ({ ownProps, data }) => ({
     loading: data.loading,
     tags: data.tags,
+    error: data.error,
     ...ownProps,
   }),
 })(TagOverviewPage)

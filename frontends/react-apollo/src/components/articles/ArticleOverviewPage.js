@@ -7,6 +7,7 @@ import gql from "graphql-tag"
 import ArticleHeader from "./ArticleHeader"
 
 import Loading from "../common/Loading"
+import Error from "../common/Error"
 
 type Props = {
   articles: Array<{
@@ -19,13 +20,14 @@ type Props = {
     tags: Array<Tag>,
   }>,
   loading: boolean,
+  error: Error,
 }
 
-const ArticleOverviewPage = (props: Props) => {
-  const { loading, articles } = props
-
+const ArticleOverviewPage = ({ loading, articles, error }: Props) => {
   if (loading) {
     return <Loading />
+  } else if (error) {
+    return <Error error={error} />
   } else {
     return (
       <div>
@@ -66,6 +68,7 @@ const articlesQuery = gql`
 export default graphql(articlesQuery, {
   props: ({ ownProps, data }) => ({
     loading: data.loading,
+    error: data.error,
     articles: data.articles,
     ...ownProps,
   }),

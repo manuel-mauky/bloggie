@@ -1,8 +1,6 @@
 // @flow
 
 import React from "react"
-import { Link } from "react-router-dom"
-import FormattedDate from "../common/FormattedDate"
 
 import ArticleTitleShort from "../articles/ArticleTitleShort"
 

@@ -7,9 +7,10 @@ import gql from "graphql-tag"
 
 import Loading from "../common/Loading"
 
-import Error from "../common/Error"
+import ErrorMessage from "../common/ErrorMessage"
 
 import type { TagWithArticleShortInfo } from "./TagDetails"
+import type { Error } from "../../common.types"
 import TagDetails from "./TagDetails"
 
 type Props = {
@@ -22,7 +23,7 @@ const TagOverviewPage = ({ loading, tags, error, data }: Props) => {
   if (loading) {
     return <Loading />
   } else if (error) {
-    return <Error error={error} />
+    return <ErrorMessage error={error} />
   } else {
     return <div>{tags.map(tag => <TagDetails key={tag.id} tag={tag} />)}</div>
   }

@@ -1,5 +1,9 @@
 // @flow
 
+export type Error = {
+  message: string,
+}
+
 export type Author = {
   id: string,
   name: string,

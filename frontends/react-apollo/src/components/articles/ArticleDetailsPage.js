@@ -4,12 +4,12 @@ import React from "react"
 import { graphql } from "react-apollo"
 import gql from "graphql-tag"
 
-import type { Article } from "../../common.types"
+import type { Article, Error } from "../../common.types"
 
 import ArticleHeader from "./ArticleHeader"
 import NoMatchPage from "../NoMatchPage"
 import Loading from "../common/Loading"
-import Error from "../common/Error"
+import ErrorMessage from "../common/ErrorMessage"
 
 type Props = {
   match: {
@@ -26,7 +26,7 @@ const ArticleDetailsPage = ({ article, loading, error }: Props) => {
   if (loading) {
     return <Loading />
   } else if (error) {
-    return <Error error={error} />
+    return <ErrorMessage error={error} />
   } else {
     if (article) {
       return (

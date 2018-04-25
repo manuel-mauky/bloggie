@@ -1,13 +1,13 @@
 // @flow
 import React from "react"
 
-import type { Author, Tag } from "../../common.types"
+import type { Author, Tag, Error } from "../../common.types"
 import { graphql } from "react-apollo"
 import gql from "graphql-tag"
 import ArticleHeader from "./ArticleHeader"
 
 import Loading from "../common/Loading"
-import Error from "../common/Error"
+import ErrorMessage from "../common/ErrorMessage"
 
 type Props = {
   articles: Array<{
@@ -27,7 +27,7 @@ const ArticleOverviewPage = ({ loading, articles, error }: Props) => {
   if (loading) {
     return <Loading />
   } else if (error) {
-    return <Error error={error} />
+    return <ErrorMessage error={error} />
   } else {
     return (
       <div>

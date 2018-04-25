@@ -5,10 +5,10 @@ import React from "react"
 import { graphql } from "react-apollo"
 import gql from "graphql-tag"
 
-import type { Author } from "../common.types"
+import type { Author, Error } from "../../common.types"
 
 import Loading from "../common/Loading"
-import Error from "../common/Error"
+import ErrorMessage from "../common/ErrorMessage"
 import ArticleTitleShort from "../articles/ArticleTitleShort"
 
 type Props = {
@@ -21,7 +21,7 @@ const AuthorDetailsPage = ({ loading, error, author }: Props) => {
   if (loading) {
     return <Loading />
   } else if (error) {
-    return <Error error={error} />
+    return <ErrorMessage error={error} />
   } else {
     return (
       <div>
@@ -57,9 +57,6 @@ const authorDetailsQuery = gql`
         authors {
           id
           name
-        }
-        comments {
-          text
         }
       }
     }

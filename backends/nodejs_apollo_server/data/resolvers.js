@@ -44,10 +44,15 @@ const resolvers = {
     addCommentAsGuest(root, args) {
       return Article.findOne({ where: { id: args.articleId } }).then(article => {
         if (article) {
-          return article.createComment({
-            text: args.text,
-            guestAuthor: args.authorName,
-          })
+          return article
+            .createComment({
+              text: args.text,
+              date: new Date(),
+              guestAuthor: args.authorName,
+            })
+            .then(comment => {
+              return comment.getArticle()
+            })
         } else {
           throw new Error(`No article with id='${args.articleId}' found.`)
         }
@@ -61,11 +66,12 @@ const resolvers = {
             if (author) {
               return article
                 .createComment({
+                  date: new Date(),
                   text: args.text,
                 })
                 .then(comment => {
                   comment.setAuthor(author)
-                  return comment
+                  return comment.getArticle()
                 })
             } else {
               throw new Error(`No author with id='${args.authorId}' found`)

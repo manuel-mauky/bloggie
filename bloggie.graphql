@@ -37,13 +37,13 @@ type Mutation {
     articleId: ID!
     authorName: String!
     text: String!
-  ): Comment
+  ): Article
 
   addCommentAsAuthor(
     articleId: ID!
     authorId: ID!
     text: String!
-  ): Comment
+  ): Article
 }
 
 type Article {

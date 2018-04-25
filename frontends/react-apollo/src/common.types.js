@@ -24,3 +24,11 @@ export type Article = {
   authors: Array<Author>,
   tags: Array<Tag>,
 }
+
+export type Comment = {
+  id: string,
+  text: string,
+  date: Date | string,
+  guestAuthor: ?string,
+  author: ?Author,
+}

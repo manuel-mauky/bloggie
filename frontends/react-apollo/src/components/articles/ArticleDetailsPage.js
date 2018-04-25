@@ -11,6 +11,8 @@ import NoMatchPage from "../NoMatchPage"
 import Loading from "../common/Loading"
 import ErrorMessage from "../common/ErrorMessage"
 
+import CommentList from "../comments/CommentList"
+
 type Props = {
   match: {
     params: {
@@ -45,6 +47,11 @@ const ArticleDetailsPage = ({ article, loading, error }: Props) => {
           </section>
           <hr />
           <section>{article.text}</section>
+          <hr />
+          <div>
+            <h4>Comments</h4>
+            <CommentList articleId={article.id} />
+          </div>
         </article>
       )
     } else {

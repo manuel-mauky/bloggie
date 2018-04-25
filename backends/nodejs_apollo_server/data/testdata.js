@@ -5,6 +5,10 @@ import R from "ramda"
 
 import faker from "faker"
 
+const NUMBER_OF_ARTICLES = 5
+const NUMBER_OF_AUTHORS = 3
+const NUMBER_OF_COMMENTS_PER_ARTICLE = 3
+
 const slugify = input => slug(input.toLowerCase())
 
 const createTestData = () => {
@@ -43,26 +47,30 @@ const createTestData = () => {
                   return article
                 })
                 .then(article => {
-                  if (faker.random.boolean()) {
-                    return article.createComment({
-                      text: faker.lorem.sentences(3),
-                      guestAuthor: faker.name.findName(),
-                    })
-                  } else {
-                    return article
-                      .createComment({
+                  return R.times(i => {
+                    if (faker.random.boolean()) {
+                      return article.createComment({
                         text: faker.lorem.sentences(3),
-                        author: author,
+                        guestAuthor: faker.name.findName(),
+                        date: faker.date.recent(),
                       })
-                      .then(comment => {
-                        comment.setAuthor(author)
-                        return comment
-                      })
-                  }
+                    } else {
+                      return article
+                        .createComment({
+                          text: faker.lorem.sentences(3),
+                          author: author,
+                          date: faker.date.recent(),
+                        })
+                        .then(comment => {
+                          comment.setAuthor(author)
+                          return comment
+                        })
+                    }
+                  }, NUMBER_OF_COMMENTS_PER_ARTICLE)
                 })
-            }, 5)
+            }, NUMBER_OF_ARTICLES)
           })
-        }, 3)
+        }, NUMBER_OF_AUTHORS)
       })
   })
 }

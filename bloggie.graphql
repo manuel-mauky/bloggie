@@ -79,6 +79,7 @@ type Comment {
 
   article: Article!
 
+  date: DateTime
   author: Author
   guestAuthor: String
 }

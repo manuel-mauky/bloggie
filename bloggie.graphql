@@ -15,6 +15,7 @@ input ArticleInput {
   text: String
 }
 
+
 type Mutation {
   addTag(name: String!): Tag
 
@@ -31,6 +32,18 @@ type Mutation {
     articleId: ID!
     tags: [ID]!
   ): Article
+
+  addCommentAsGuest(
+    articleId: ID!
+    authorName: String!
+    text: String!
+  ): Comment
+
+  addCommentAsAuthor(
+    articleId: ID!
+    authorId: ID!
+    text: String!
+  ): Comment
 }
 
 type Article {

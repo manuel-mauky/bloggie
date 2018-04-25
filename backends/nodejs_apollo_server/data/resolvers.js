@@ -40,6 +40,42 @@ const resolvers = {
         }
       })
     },
+
+    addCommentAsGuest(root, args) {
+      return Article.findOne({ where: { id: args.articleId } }).then(article => {
+        if (article) {
+          return article.createComment({
+            text: args.text,
+            guestAuthor: args.authorName,
+          })
+        } else {
+          throw new Error(`No article with id='${args.articleId}' found.`)
+        }
+      })
+    },
+
+    addCommentAsAuthor(root, args) {
+      return Article.findOne({ where: { id: args.articleId } }).then(article => {
+        if (article) {
+          return Author.findOne({ where: { id: args.authorId } }).then(author => {
+            if (author) {
+              return article
+                .createComment({
+                  text: args.text,
+                })
+                .then(comment => {
+                  comment.setAuthor(author)
+                  return comment
+                })
+            } else {
+              throw new Error(`No author with id='${args.authorId}' found`)
+            }
+          })
+        } else {
+          throw new Error(`No article with id='${args.articleId}' found.`)
+        }
+      })
+    },
   },
   Query: {
     articles(root, args) {

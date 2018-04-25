@@ -1,7 +1,7 @@
 // @flow
 
 import React from "react"
-import { graphql } from "react-apollo"
+import { Query } from "react-apollo"
 import gql from "graphql-tag"
 
 import Loading from "../common/Loading"
@@ -10,25 +10,10 @@ import ErrorMessage from "../common/ErrorMessage"
 import type { Comment, Error } from "../../common.types"
 import CommentView from "./CommentView"
 
-type Props = {
-  comments: Array<Comment>,
-  loading: boolean,
-  error: Error,
-}
-
-const CommentList = ({ comments, loading, error }: Props) => {
-  if (loading) {
-    return <Loading />
-  } else if (error) {
-    return <ErrorMessage error={error} />
-  } else {
-    return <div>{comments.map(comment => <CommentView key={comment.id} comment={comment} />)}</div>
-  }
-}
-
 const commentListQuery = gql`
   query commentList($articleId: ID!) {
     article(id: $articleId) {
+      id
       comments {
         id
         text
@@ -42,17 +27,34 @@ const commentListQuery = gql`
     }
   }
 `
+type InternalProps = {
+  comments: Array<Comment>,
+  loading: boolean,
+  error: Error,
+}
 
-export default graphql(commentListQuery, {
-  options: props => ({
-    variables: {
-      articleId: props.articleId,
-    },
-  }),
-  props: ({ ownProps, data }) => ({
-    ...ownProps,
-    loading: data.loading,
-    error: data.error,
-    comments: data.article && data.article.comments,
-  }),
-})(CommentList)
+const CommentListView = ({ loading, error, comments }: InternalProps) => {
+  if (loading) {
+    return <Loading />
+  } else if (error) {
+    return <ErrorMessage error={error} />
+  } else {
+    if (comments) {
+      return <div>{comments.map(comment => <CommentView key={comment.id} comment={comment} />)}</div>
+    }
+  }
+}
+
+type Props = {
+  articleId: string,
+}
+
+const CommentList = ({ articleId }: Props) => (
+  <Query query={commentListQuery} variables={{ articleId: articleId }}>
+    {({ loading, error, data }) => (
+      <CommentListView loading={loading} error={error} comments={data && data.article && data.article.comments} />
+    )}
+  </Query>
+)
+
+export default CommentList

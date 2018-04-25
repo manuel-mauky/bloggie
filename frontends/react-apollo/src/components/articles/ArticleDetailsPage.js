@@ -12,6 +12,7 @@ import Loading from "../common/Loading"
 import ErrorMessage from "../common/ErrorMessage"
 
 import CommentList from "../comments/CommentList"
+import AddComment from "../comments/AddComment"
 
 type Props = {
   match: {
@@ -51,6 +52,9 @@ const ArticleDetailsPage = ({ article, loading, error }: Props) => {
           <div>
             <h4>Comments</h4>
             <CommentList articleId={article.id} />
+            <hr />
+            <h4>Add a Comment</h4>
+            <AddComment articleId={article.id} />
           </div>
         </article>
       )

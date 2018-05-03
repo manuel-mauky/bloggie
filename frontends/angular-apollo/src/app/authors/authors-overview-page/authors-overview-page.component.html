@@ -1,3 +1,11 @@
-<p>
-  authors-overview-page works!
-</p>
+<div *ngIf="loading">
+  <p>loading</p>
+</div>
+
+<div *ngIf="!loading">
+
+  <div *ngFor="let author of authors">
+    <p>author</p>
+  </div>
+
+</div>

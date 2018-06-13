@@ -33,5 +33,11 @@ dependencies {
     compile('org.springframework.boot:spring-boot-starter-actuator')
     compile('org.springframework.boot:spring-boot-starter-data-jpa')
     compile('org.springframework.boot:spring-boot-starter-web')
+    compile 'com.graphql-java:graphql-spring-boot-starter:4.2.0'
+    compile 'com.graphql-java:graphql-java-tools:5.1.0'
+    // see https://github.com/spring-projects/spring-boot/issues/12793#issuecomment-391769171
+    implementation ('org.yaml:snakeyaml:1.19') {
+        force = true
+    }
     testCompile group: 'junit', name: 'junit', version: '4.12'
 }

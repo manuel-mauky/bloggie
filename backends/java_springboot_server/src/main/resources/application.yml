@@ -1,3 +1,9 @@
+graphql:
+  servlet:
+    mapping: /api/graphql
+    enabled: true
+    corsEnabled: true
+
 
 management:
   server:

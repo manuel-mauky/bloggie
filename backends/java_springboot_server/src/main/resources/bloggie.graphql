@@ -1,10 +1,12 @@
 scalar DateTime
 
 type Query {
-  article(id: ID, permalink: String): Article
-  articles: [Article]
-  author(id: ID, name: String): Author
-  authors: [Author]
+
+  #article(id: ID, permalink: String): Article
+  #articles: [Article]
+  #author(id: ID, name: String): Author
+  #authors: [Author]
+
   tags: [Tag]
 }
 
@@ -16,35 +18,36 @@ input ArticleInput {
 }
 
 
-type Mutation {
-  addTag(name: String!): Tag
-
-  addArticle(
-    input: ArticleInput!
-  ): Article
-
-  editArticle(
-    id: ID!
-    input: ArticleInput!
-  ): Article
-
-  editTags(
-    articleId: ID!
-    tags: [ID]!
-  ): Article
-
-  addCommentAsGuest(
-    articleId: ID!
-    authorName: String!
-    text: String!
-  ): Article
-
-  addCommentAsAuthor(
-    articleId: ID!
-    authorId: ID!
-    text: String!
-  ): Article
-}
+#type Mutation {
+#  addTag(name: String!): Tag
+#
+#  addArticle(
+#    input: ArticleInput!
+#  ): Article
+#
+#  editArticle(
+#    id: ID!
+#    input: ArticleInput!
+#  ): Article
+#
+#  editTags(
+#    articleId: ID!
+#    tags: [ID]!
+#  ): Article
+#
+#  addCommentAsGuest(
+#    articleId: ID!
+#    authorName: String!
+#    text: String!
+#  ): Article
+#
+#  addCommentAsAuthor(
+#    articleId: ID!
+#    authorId: ID!
+#    text: String!
+#  ): Article
+#}
+#
 
 type Article {
   id: ID!

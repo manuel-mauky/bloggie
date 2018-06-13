@@ -9,6 +9,8 @@ import org.springframework.context.annotation.Bean;
 
 import com.coxautodev.graphql.tools.SchemaParser;
 
+import eu.lestard.bloggie.server.boot.graphql.GraphQLLocalDateTime;
+import eu.lestard.bloggie.server.boot.graphql.Query;
 import graphql.schema.GraphQLSchema;
 
 @SpringBootApplication
@@ -17,15 +19,26 @@ public class App {
 	@Autowired
 	private TestDataSetup testDataSetup;
 
+	@Autowired
+	private Query query;
+
 	public static void main(String[] args) {
 		SpringApplication.run(App.class);
 	}
 
+
 	@Bean
-	GraphQLSchema schema() {
+	SchemaParser schemaParser() {
 		return SchemaParser.newParser()
 				.file("bloggie.graphql")
-				.build()
+				.resolvers(query)
+				.scalars(new GraphQLLocalDateTime())
+				.build();
+	}
+
+	@Bean
+	GraphQLSchema schema(SchemaParser parser) {
+		return parser
 				.makeExecutableSchema();
 
 	}

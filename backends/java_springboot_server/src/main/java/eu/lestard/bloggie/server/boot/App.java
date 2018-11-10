@@ -2,6 +2,7 @@ package eu.lestard.bloggie.server.boot;
 
 import javax.annotation.PostConstruct;
 
+import eu.lestard.bloggie.server.boot.graphql.Mutation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -22,6 +23,10 @@ public class App {
 	@Autowired
 	private Query query;
 
+
+	@Autowired
+	private Mutation mutation;
+
 	public static void main(String[] args) {
 		SpringApplication.run(App.class);
 	}
@@ -31,7 +36,7 @@ public class App {
 	SchemaParser schemaParser() {
 		return SchemaParser.newParser()
 				.file("bloggie.graphql")
-				.resolvers(query)
+				.resolvers(query, mutation)
 				.scalars(new GraphQLLocalDateTime())
 				.build();
 	}
